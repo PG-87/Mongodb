@@ -15,8 +15,8 @@ public class Program {
 
         MongoClient client = MongoClients.create();
         MongoDatabase database = client.getDatabase("javatest");
-        database.createCollection("coll4");
-        MongoCollection<Document> collection = database.getCollection("coll4");
+        database.createCollection("coll");
+        MongoCollection<Document> collection = database.getCollection("coll");
         OrgJsonMain json = new OrgJsonMain();
         List<Document> docs = json.parseAndReturn();
         collection.insertMany(docs);

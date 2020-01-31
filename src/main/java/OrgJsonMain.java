@@ -20,10 +20,10 @@ public class OrgJsonMain {
 
             for (int i = 0; i < jArr.length(); i++) {
                 jo = jArr.getJSONObject(i);
-                Document doc = new Document("_id", i)
-                        .append("Resturant: ", jo.getString("name"))
-                        .append("Stars: ", jo.getInt("stars"))
-                        .append("Food: ", jo.getString("categories"));
+                Document doc = new Document("_id", jo.getString("_id"))
+                        .append("Name", jo.getString("name"))
+                        .append("stars", jo.getInt("stars"))
+                        .append("categories", jo.getString("categories"));
                 docs.add(doc);
             }
 
