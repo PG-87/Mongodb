@@ -1,55 +1,44 @@
+import com.mongodb.*;
 import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoClients;
 import org.bson.Document;
+import org.json.JSONObject;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Program {
     public static void main(String[] args) throws FileNotFoundException {
 
-        List<Document> documents = new ArrayList<Document>();
-        Document document = new Document("_id", "5c39f9b5df831369c19b6bca")
-                .append("name", "Sun Bakery Trattoria")
-                .append("stars", 4)
-                .append("categories", Arrays.asList("Pizza", "Pasta", "Italian", "Coffee", "Sandwiches"));
-        documents.add(document);
+        List<Document> savedList = new ArrayList<Document>();
+        jsonParser jPars = new jsonParser();
 
-        Document document2 = new Document("_id", "5c39f9b5df831369c19b6bcb")
-                .append("name", "Blue Bagels Grill")
-                .append("stars", 3)
-                .append("categories", Arrays.asList("Bagels", "Cookies", "Sandwiches"));
-        documents.add(document2);
-
-        Document document3 = new Document("_id", "5c39f9b5df831369c19b6bcc")
-                .append("name", "Hot Bakery Cafe")
-                .append("stars", 4)
-                .append("categories", Arrays.asList("Bakery", "Cafe", "Coffee", "Dessert"));
-        documents.add(document3);
-
-        Document document4 = new Document("_id", "5c39f9b5df831369c19b6bcd")
-                .append("name", "XYZ Coffee Bar")
-                .append("stars", 5)
-                .append("categories", Arrays.asList("Coffee", "Cafe", "Bakery", "Chocolates"));
-        documents.add(document4);
-
-        Document document5 = new Document("_id", "5c39f9b5df831369c19b6bce")
-                .append("name", "456 Cookies Shop")
-                .append("stars", 4)
-                .append("categories", Arrays.asList("Bakery", "Cookies", "Cake", "Coffee"));
-        documents.add(document5);
-
-
+        //jPars.parseAndPrint("C:\\Users\\pgpat\\IdeaProjects\\Mongodb\\docs.json");
+        //jPars.parseAndSave("C:\\Users\\pgpat\\IdeaProjects\\Mongodb\\docs.json");
+        Block<Document> printBlock = new Block<Document>() {
+            @Override
+            public void apply(final Document document) {
+                System.out.println(document.toJson());
+            }
+        };
         MongoClient client = MongoClients.create();
         MongoDatabase database = client.getDatabase("javatest");
-        database.createCollection("coll");
-        Document doc = new Document("_id", 1);
+        database.createCollection("coll2");
+        MongoCollection<Document> collection = database.getCollection("coll2");
 
 
+        savedList.add((Document) jPars.parseAndSave("C:\\Users\\pgpat\\IdeaProjects\\Mongodb\\docs.json"));
+        Document doc = new Document("_id", 2)
+                .append("String", "hihi");
+        collection.insertOne(doc);
+
+
+
+
+        collection.find().forEach(printBlock);
         client.close();
     }
 }
