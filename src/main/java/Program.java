@@ -18,7 +18,7 @@ public class Program {
         database.createCollection("coll");
         MongoCollection<Document> collection = database.getCollection("coll");
         OrgJsonMain json = new OrgJsonMain();
-        List<Document> docs = json.parseAndReturn();
+        List<Document> docs = json.parseAndReturn("C:\\Users\\pgpat\\IdeaProjects\\Mongodb\\docs.json");
         collection.insertMany(docs);
 
         client.close();

@@ -8,12 +8,12 @@ import org.json.*;
 
 public class OrgJsonMain {
 
-        public List parseAndReturn(){
+        public List parseAndReturn(String localPath){
 
         List<Document> docs = new ArrayList<Document>();
 
         try{
-            String json = getJsonAsString("C:\\Users\\pgpat\\IdeaProjects\\Mongodb\\docs.json");
+            String json = getJsonAsString(localPath);
             JSONTokener jt = new JSONTokener(json);
             JSONObject jo = new JSONObject(jt);
             JSONArray jArr = jo.getJSONArray("document");
