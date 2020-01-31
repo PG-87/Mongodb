@@ -15,16 +15,12 @@ public class Program {
 
         MongoClient client = MongoClients.create();
         MongoDatabase database = client.getDatabase("javatest");
-        database.createCollection("coll3");
-        MongoCollection<Document> collection = database.getCollection("coll3");
+        database.createCollection("coll4");
+        MongoCollection<Document> collection = database.getCollection("coll4");
         OrgJsonMain json = new OrgJsonMain();
         List<Document> docs = json.parseAndReturn();
         collection.insertMany(docs);
 
-
-
-
-//        collection.find().forEach(printBlock);
         client.close();
     }
 }

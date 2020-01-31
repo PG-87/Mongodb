@@ -9,7 +9,7 @@ import org.json.*;
 public class OrgJsonMain {
 
         public List parseAndReturn(){
-    //public static void main(String[] args) {
+
         List<Document> docs = new ArrayList<Document>();
 
         try{
@@ -17,13 +17,6 @@ public class OrgJsonMain {
             JSONTokener jt = new JSONTokener(json);
             JSONObject jo = new JSONObject(jt);
             JSONArray jArr = jo.getJSONArray("document");
-
-//            for (int i = 0; i < jArr.length() ; i++) {
-//                jo = jArr.getJSONObject(i);
-//                System.out.println("Resutrant: " + jo.getString("name"));
-//                System.out.println("Stars: " + jo.getInt("stars"));
-//                System.out.println("Food: " + jo.getString("categories"));
-//            }
 
             for (int i = 0; i < jArr.length(); i++) {
                 jo = jArr.getJSONObject(i);
@@ -33,7 +26,7 @@ public class OrgJsonMain {
                         .append("Food: ", jo.getString("categories"));
                 docs.add(doc);
             }
-            System.out.println(docs);
+
         }catch(IOException ioe){
             System.err.println("Couldn't read file: " + ioe.getMessage());
         }catch (JSONException jsone){
